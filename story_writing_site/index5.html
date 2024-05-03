@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Writing Site</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <header>
+        <h1>Story Writing Site</h1>
+        <button id="createStoryBtn">Write a Story</button>
+    </header>
+    <div id="storyList">
+    </div>
+    <div id="storyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create a Story</h2>
+            <input type="text" id="storyTitle" placeholder="Enter title">
+            <input type="text" id="storyDescription" placeholder="Enter description">
+            <button id="startWritingBtn" disabled>Start Writing</button>
+            <button id="submitStoryBtn">Submit</button>
+        </div>
+    </div>
+    <script src="script2.js"></script>
+</body>
+</html>

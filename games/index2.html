@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Own Adventure: Fantasial Darkness</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose Your Own Adventure: Fantasial Darkness</h1>
+
+    <label for="character">Select a character:</label>
+    <select id="character">
+        <option value="adam">Adam</option>
+        <option value="sorceresse">Sorceresse</option>
+        <option value="hasuro">Hasuro</option>
+        <option value="sakuria">Sakuria</option>
+    </select>
+
+    <br>
+
+    <label for="personality">Enter the character's personality:</label>
+    <input type="text" id="personality" placeholder="e.g., Adventurous">
+
+    <br>
+
+    <button onclick="startAdventure()">Start Adventure</button>
+
+    <br>
+
+    <p id="story"></p>
+    <div id="choices"></div>
+
+    <script defer>
+        let storyText = "";
+        let currentScene = "start";
+        let selectedCharacter = "";
+        let enteredPersonality = "";
+
+        function startAdventure() {
+            selectedCharacter = document.getElementById("character").value;
+            enteredPersonality = document.getElementById("personality").value;
+
+            if (!enteredPersonality) {
+                alert("Please enter the character's personality.");
+                return;
+            }
+
+            currentScene = "start";
+            generateStory();
+        }
+
+        function generateStory() {
+            storyText = "";
+            document.getElementById("choices").innerHTML = "";
+
+            switch (currentScene) {
+                case "start":
+                    storyText = `${selectedCharacter} is a ${enteredPersonality} person who finds themselves at a crossroads.`;
+                    displayChoices(["Go to the inn (Sorceresse)", "Wait inside the inn (Adam)", "Hide out in the forest (Hasuro)", "Stay inside the palace (Sakuria)"]);
+                    break;
+                case "inn":
+                    storyText = `In the inn, ${selectedCharacter} decides to ...`;
+                    displayChoices(["Talk to Adam", "Pretend he doesn't exist"]);
+                    break;
+                case "Talk to Adam":
+                    storyText = `${selectedCharacter} sits with Adam and discusses the world's current situations`;
+                    displayChoices(["Continue talking", "End conversation and go to the forest"]);
+                    break;
+                case "Pretend he doesn't exist":
+                    displayEnd();
+                    break;
+                case "Continue talking":
+                    storyText = `${selectedCharacter} continues to talk to Adam and maybe orders a meal or two`;
+                    displayChoices(["End conversation and go to the forest"]);
+                    break;
+                // Add more cases as needed
+                default:
+                    // Handle other scenes or end the game
+                    displayEnd();
+                    break;
+            }
+
+            document.getElementById("story").innerText = storyText;
+        }
+
+        function displayChoices(choices) {
+            for (let i = 0; i < choices.length; i++) {
+                const choiceBtn = document.createElement("button");
+                choiceBtn.innerText = choices[i];
+                choiceBtn.onclick = function () {
+                    handleChoice(choices[i]);
+                };
+                document.getElementById("choices").appendChild(choiceBtn);
+            }
+        }
+
+        function handleChoice(choice) {
+            switch (currentScene) {
+                case "start":
+                    if (choice === "Go to the inn (Sorceresse)") {
+                        currentScene = "inn";
+                    } else if (choice === "Wait inside the inn (Adam)") {
+                        currentScene = "insideTheInn";
+                    } else if (choice === "Hide out in the forest (Hasuro)") {
+                        currentScene = "outsideTheInn";
+                    } else if (choice === "Stay inside the palace (Sakuria)") {
+                        currentScene = "palace";
+                    }
+                    break;
+                case "inn":
+                    if (choice === "Talk to Adam") {
+                        currentScene = "Talk to Adam";
+                    } else if (choice === "Pretend he doesn't exist") {
+                        currentScene = "chatWithTravelers";
+                    }
+                    break;
+                case "Talk to Adam":
+                    if (choice === "Continue talking") {
+                        currentScene = "Continue talking";
+                    } else if (choice === "End conversation and go to the forest") {
+                        currentScene = "forest";
+                    }
+                    break;
+                // Add more cases as needed
+                default:
+                    break;
+            }
+
+            generateStory();
+        }
+
+        function displayEnd() {
+            const endMessage = document.createElement("p");
+            endMessage.innerText = "The adventure comes to an end. Thanks for playing!";
+            document.getElementById("choices").appendChild(endMessage);
+        }
+    </script>
+</body>
+</html>

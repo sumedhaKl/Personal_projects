@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Map Maker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="mapContainer">
+            <canvas id="mapCanvas" width="800" height="600"></canvas>
+        </div>
+        <div id="controlsContainer">
+            <div id="controls">
+                <h2>Map Customization</h2>
+                <label for="regionColor">Region Color:</label>
+                <input type="color" id="regionColor" value="#ff0000">
+
+                <label for="regionName">Region Name:</label>
+                <input type="text" id="regionName" placeholder="Enter region name">
+
+                <button onclick="drawRegion()">Draw Region</button>
+
+                <label for="mapName">Map Name:</label>
+                <input type="text" id="mapName" placeholder="Enter map name">
+
+                <label for="culture">Culture:</label>
+                <input type="text" id="culture" placeholder="Enter culture name" value="Fantasy Culture">
+
+                <label for="province">Province:</label>
+                <input type="text" id="province" placeholder="Enter province name">
+
+                <label for="state">State:</label>
+                <input type="text" id="state" placeholder="Enter state name" value="Barony of Evergreen">
+
+                <button onclick="applyCustomization()">Apply</button>
+                <button onclick="generateRandomMapName()">Generate Random Map Name</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

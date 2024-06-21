@@ -65,8 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const actionButtons = document.querySelectorAll('.action');
       actionButtons.forEach(button => {
           button.addEventListener('click', () => {
-              actionButtons.forEach(btn => btn.classList.remove('selected'));
-              button.classList.add('selected');
+              button.classList.toggle('selected');
           });
       });
 
@@ -104,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       document.getElementById('next-quest').addEventListener('click', () => {
-          loadQuest(characters); 
+          loadQuest(characters);
       });
   }
 

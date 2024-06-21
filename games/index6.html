@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RPG Game</title>
-  <link rel="stylesheet" href="style5.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Quest: Legends Unleashed</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
-  <div id="buttons">
-    <button id="startButton">Start</button>
-    <button id="pauseButton">Pause</button>
-  </div>
-  <div id="quests">
-    <h2>Current Quest:</h2>
-    <p id="questDescription"></p>
-  </div>
-  <script src="scripts.js"></script>
+    <div id="game-container">
+        <h1>Anime Quest: Legends Unleashed</h1>
+        <div id="character-select">
+            <h2>Select Your Team</h2>
+            <div class="character" data-character="hikaru">Hikaru</div>
+            <div class="character" data-character="aiko">Aiko</div>
+            <div class="character" data-character="kaito">Kaito</div>
+            <div class="character" data-character="yumi">Yumi</div>
+            <div class="character" data-character="taro">Taro</div>
+        </div>
+        <button id="start-game" style="display:none;">Start Game</button>
+        <div id="game-content">
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

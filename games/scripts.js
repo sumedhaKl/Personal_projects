@@ -3,6 +3,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const startGameButton = document.getElementById('start-game');
   const gameContent = document.getElementById('game-content');
   let selectedCharacters = [];
+  let currentQuest = 0;
+
+  const quests = [
+      {
+          title: "The Dark Forest",
+          description: "The team enters the dark forest, where danger lurks around every corner. Prepare for battle!",
+          boss: "Shadow Beast"
+      },
+      {
+          title: "The Mystic Cave",
+          description: "Deep within the Mystic Cave, the team encounters glowing crystals and eerie echoes. A formidable enemy awaits!",
+          boss: "Crystal Guardian"
+      },
+      {
+          title: "The Enchanted Lake",
+          description: "The Enchanted Lake's waters shimmer with magic. The team must face a powerful water spirit!",
+          boss: "Water Serpent"
+      },
+      {
+          title: "The Sky Fortress",
+          description: "High above the clouds, the Sky Fortress is home to dangerous flying creatures. The team prepares for an aerial battle!",
+          boss: "Storm Dragon"
+      },
+      {
+          title: "The Lava Pits",
+          description: "The Lava Pits are filled with molten rock and fire. The team faces the final challenge: a fiery monster!",
+          boss: "Magma Titan"
+      }
+  ];
 
   characters.forEach(character => {
       character.addEventListener('click', () => {
@@ -31,26 +60,40 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       document.getElementById('start-quest').addEventListener('click', () => {
-          loadQuest(characters);
+          loadQuest(currentQuest, characters);
       });
   }
 
-  function loadQuest(characters) {
+  function loadQuest(questIndex, characters) {
+      if (questIndex >= quests.length) {
+          gameContent.innerHTML = `
+              <h2>Congratulations!</h2>
+              <p>Your team has completed all the quests and saved Eryndor!</p>
+              <button id="play-again">Play Again</button>
+          `;
+          document.getElementById('play-again').addEventListener('click', () => {
+              location.reload();
+          });
+          return;
+      }
+
+      const quest = quests[questIndex];
+
       gameContent.innerHTML = `
-          <h2>Quest 1: The Dark Forest</h2>
-          <p>The team enters the dark forest, where danger lurks around every corner. Prepare for battle!</p>
+          <h2>Quest ${questIndex + 1}: ${quest.title}</h2>
+          <p>${quest.description}</p>
           <button id="battle-boss">Battle Boss</button>
       `;
 
       document.getElementById('battle-boss').addEventListener('click', () => {
-          battleBoss(characters);
+          battleBoss(quest.boss, characters);
       });
   }
 
-  function battleBoss(characters) {
+  function battleBoss(boss, characters) {
       gameContent.innerHTML = `
-          <h2>Boss Fight: Shadow Beast</h2>
-          <p>The team faces the fearsome Shadow Beast! Choose your actions:</p>
+          <h2>Boss Fight: ${boss}</h2>
+          <p>The team faces the fearsome ${boss}! Choose your actions:</p>
           ${characters.map(character => `
               <div class="character-action">
                   <h3>${capitalize(character)}</h3>
@@ -87,10 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
           let outcome;
           switch(actionType) {
               case 'attack':
-                  outcome = `${capitalize(character)} attacks the Shadow Beast with a powerful strike!`;
+                  outcome = `${capitalize(character)} attacks the boss with a powerful strike!`;
                   break;
               case 'defend':
-                  outcome = `${capitalize(character)} defends against the Shadow Beast's attack!`;
+                  outcome = `${capitalize(character)} defends against the boss's attack!`;
                   break;
               case 'special':
                   outcome = `${capitalize(character)} uses a special ability to unleash devastating damage!`;
@@ -106,7 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       document.getElementById('next-quest').addEventListener('click', () => {
-          loadQuest(characters);
+          currentQuest++;
+          loadQuest(currentQuest, characters);
       });
   }
 

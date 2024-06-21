@@ -64,8 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const actionButtons = document.querySelectorAll('.action');
       actionButtons.forEach(button => {
-          button.addEventListener('click', () => {
-              button.classList.toggle('selected');
+          button.addEventListener('click', (event) => {
+              const characterActionDiv = event.target.parentElement;
+              const actionBtns = characterActionDiv.querySelectorAll('.action');
+              actionBtns.forEach(btn => btn.classList.remove('selected'));
+              button.classList.add('selected');
           });
       });
 

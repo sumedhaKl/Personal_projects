@@ -57,3 +57,16 @@ button:hover {
   background-color: #666;
   color: #fff;
 }
+
+#game-info {
+  margin-bottom: 20px;
+}
+
+#game-info ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#game-info li {
+  margin-bottom: 10px;
+}
